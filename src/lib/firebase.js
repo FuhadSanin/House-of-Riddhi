@@ -26,4 +26,5 @@ if (typeof window !== "undefined") {
       if (ok) analytics = getAnalytics(app);
     })
     .catch(() => {});
+  console.log("Firebase initialized");
 }
