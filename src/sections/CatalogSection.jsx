@@ -1,42 +1,43 @@
-import { Link } from "react-router-dom";
+import { Img } from "@/components/ui/Img";
 import { SectionHeading } from "@/sections/SectionHeading";
+import { IMG } from "@/sections/data";
 
 const collections = [
   {
-    id: "cotton",
-    label: "Cotton Sarees",
-    eyebrow: "Breathe in comfort",
+    id: "artisan",
+    number: "1",
+    title: "Artisan-crafted sarees",
     description:
-      "Soft, handwoven cotton sarees perfect for daily elegance. Lightweight, breathable, and designed with traditional prints that carry the spirit of Indian artisanship.",
-    features: ["Kalamkari prints", "Block-printed motifs", "Soft-wash care", "All-day comfort"],
-    accentColor: "bg-gold",
-    borderColor: "border-gold/30",
-    hoverBorder: "hover:border-gold/60",
-    gradient: "from-gold/10 via-card to-card",
+      "Discover handwoven silks and cottons inspired by timeless Indian weaving traditions.",
+    image: IMG.catalog1,
+    imageAlt: "Handwoven artisan saree with traditional motifs",
   },
   {
-    id: "linen",
-    label: "Linen Sarees",
-    eyebrow: "Natural luxury",
+    id: "occasions",
+    number: "2",
+    title: "Curated for every occasion",
     description:
-      "Crisp, elegant linen sarees woven from pure flax — a fabric cherished for its refined texture, natural drape, and timeless sophistication.",
-    features: ["Natural flax fibre", "Zari border accents", "Wrinkle-resistant", "Summer-perfect"],
-    accentColor: "bg-maroon",
-    borderColor: "border-maroon/20",
-    hoverBorder: "hover:border-maroon/40",
-    gradient: "from-primary/8 via-card to-card",
+      "Each drape is curated for weddings, festivals, and elegant everyday wear.",
+    image: IMG.catalog2,
+    imageAlt: "Elegant saree curated for festive occasions",
   },
   {
-    id: "handloom",
-    label: "Handloom Weaves",
-    eyebrow: "Artisan heritage",
+    id: "limited",
+    number: "3",
+    title: "Limited edition designs",
     description:
-      "Each handloom saree is a masterpiece — woven thread by thread on traditional looms by skilled weavers preserving centuries of Indian textile heritage.",
-    features: ["Master weavers", "Traditional motifs", "One-of-a-kind weaves", "Certified handloom"],
-    accentColor: "bg-maroon-deep",
-    borderColor: "border-maroon/15",
-    hoverBorder: "hover:border-gold/40",
-    gradient: "from-maroon-deep/6 via-card to-card",
+      "Collaborations with master weavers ensure authenticity and fair, transparent sourcing.",
+    image: IMG.catalog3,
+    imageAlt: "Limited edition saree with master weaver collaboration",
+  },
+  {
+    id: "quality",
+    number: "4",
+    title: "Quality guaranteed",
+    description:
+      "Premium fabrics are inspected to ensure lasting color, sheen, and fall.",
+    image: IMG.catalog4,
+    imageAlt: "Premium saree fabric with rich sheen and drape",
   },
 ];
 
@@ -44,83 +45,50 @@ export function CatalogSection() {
   return (
     <section
       id="collections"
-      className="scroll-mt-20 border-b border-gold/15 bg-gradient-to-b from-ivory via-background to-ivory py-14 sm:flex sm:min-h-[100svh] sm:snap-start sm:items-center sm:py-24"
+      className="scroll-mt-20 border-b border-border/60 bg-background py-16 sm:flex sm:min-h-[100svh] sm:snap-start sm:items-center sm:py-24"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <div data-reveal className="reveal-up">
           <SectionHeading
-            eyebrow="Our Collections"
-            title="Threads of Tradition, Woven with Care"
-            description="Three celebrated weave families — each rooted in Indian heritage, crafted by master artisans, and designed to drape you in timeless grace."
+            eyebrow="Signature Saree Collections"
+            title="Curated Drapes for Every Occasion"
+            description="From artisan handlooms to limited-edition weaves — each saree is chosen for its craftsmanship, comfort, and timeless Indian elegance."
           />
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6">
           {collections.map((col) => (
             <article
               key={col.id}
               data-reveal
-              className={`reveal-up interactive-lift group flex flex-col overflow-hidden rounded-2xl border bg-gradient-to-b ${col.gradient} ${col.borderColor} ${col.hoverBorder} p-6 shadow-premium sm:rounded-3xl`}
+              className="reveal-up interactive-lift flex items-center gap-5 rounded-2xl border border-gold/20 bg-background/60 p-5 shadow-premium sm:gap-6 sm:p-6"
             >
-              {/* Decorative top ornament */}
-              <div className="mb-5 flex items-center gap-3">
-                <div className={`h-[2px] flex-1 ${col.accentColor} opacity-40 rounded-full`} />
-                <span className="text-[0.58rem] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                  {col.eyebrow}
-                </span>
-                <div className={`h-[2px] flex-1 ${col.accentColor} opacity-40 rounded-full`} />
-              </div>
-
-              {/* Saree swatch placeholder — gradient block imitating fabric */}
-              <div
-                className={`mb-5 flex h-44 w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.01] sm:h-52 ${
-                  col.id === "cotton"
-                    ? "from-gold/20 via-ivory-dark/60 to-gold/10"
-                    : col.id === "linen"
-                    ? "from-maroon/15 via-primary/8 to-gold/12"
-                    : "from-maroon-deep/20 via-primary/12 to-gold/15"
-                }`}
-              >
-                {/* Ethnic motif in fabric swatch */}
-                <div
-                  className="h-full w-full opacity-30"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23C9943A' stroke-width='0.5'%3E%3Crect x='5' y='5' width='30' height='30' rx='2'/%3E%3Cellipse cx='20' cy='20' rx='8' ry='12' transform='rotate(15 20 20)'/%3E%3Ccircle cx='20' cy='10' r='2'/%3E%3C/g%3E%3C/svg%3E")`,
-                    backgroundSize: "40px 40px",
-                  }}
+              <div className="relative size-[5.5rem] shrink-0 overflow-hidden rounded-xl sm:size-28">
+                <Img
+                  src={col.image}
+                  alt={col.imageAlt}
+                  className="size-full object-cover saturate-[0.85]"
                 />
+                <div
+                  className="absolute inset-0 bg-foreground/20"
+                  aria-hidden
+                />
+                <span
+                  className="absolute inset-0 flex items-center justify-center font-display text-4xl font-light leading-none text-white/80 sm:text-5xl"
+                  aria-hidden
+                >
+                  {col.number}
+                </span>
               </div>
 
-              {/* Icon badge */}
-              <div className={`flex size-11 items-center justify-center rounded-xl ${col.accentColor} shadow-sm mb-4`}>
-                <svg viewBox="0 0 24 24" fill="none" className="size-5 text-primary-foreground" aria-hidden>
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" fill="currentColor" opacity="0.9"/>
-                </svg>
+              <div className="min-w-0 flex-1">
+                <h3 className="font-display text-lg font-semibold leading-snug text-foreground sm:text-xl">
+                  {col.title}
+                </h3>
+                <p className="mt-2 font-display text-sm leading-relaxed text-muted-foreground sm:mt-2.5 sm:text-[0.9375rem]">
+                  {col.description}
+                </p>
               </div>
-
-              <h3 className="font-display text-2xl font-semibold text-foreground">{col.label}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {col.description}
-              </p>
-
-              <ul className="mt-5 space-y-2">
-                {col.features.map((feat) => (
-                  <li key={feat} className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                    <span className={`size-1.5 shrink-0 rounded-full ${col.accentColor} opacity-75`} />
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                to="/shop"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-maroon transition-colors hover:text-gold"
-              >
-                Shop {col.label}
-                <svg viewBox="0 0 16 16" fill="currentColor" className="size-3.5" aria-hidden>
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
             </article>
           ))}
         </div>

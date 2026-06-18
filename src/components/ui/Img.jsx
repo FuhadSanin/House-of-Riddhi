@@ -57,7 +57,7 @@ export function Img({
   const isLoading = status === "loading" || status === "idle";
 
   return (
-    <div ref={imgRef} className={cn("relative overflow-hidden", wrapperClass)}>
+    <div ref={imgRef} className={cn("relative overflow-hidden", className, wrapperClass)}>
       {/* Shimmer skeleton shown while loading */}
       {isLoading && !isError && (
         <div className="absolute inset-0 animate-pulse bg-muted/60" aria-hidden>
@@ -75,9 +75,8 @@ export function Img({
           onLoad={() => setStatus("loaded")}
           onError={() => setStatus("error")}
           className={cn(
-            "transition-[opacity,filter] duration-500",
-            isLoaded ? "opacity-100 blur-0" : "opacity-0 blur-sm",
-            className
+            "h-full w-full object-cover transition-[opacity,filter] duration-500",
+            isLoaded ? "opacity-100 blur-0" : "opacity-0 blur-sm"
           )}
           {...rest}
         />
@@ -86,10 +85,7 @@ export function Img({
       {/* Fallback shown when src is missing or broken */}
       {isError && (
         <div
-          className={cn(
-            "flex h-full w-full flex-col items-center justify-center gap-2 bg-muted/40 text-muted-foreground",
-            className
-          )}
+          className="flex h-full min-h-[8rem] w-full flex-col items-center justify-center gap-2 bg-muted/40 text-muted-foreground"
           aria-label={alt || "Image unavailable"}
         >
           <ImageOff className="size-8 opacity-40" aria-hidden />

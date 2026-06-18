@@ -1,4 +1,5 @@
 import { buttonVariants } from "@/components/ui/button";
+import { Img } from "@/components/ui/Img";
 import { cn } from "@/lib/utils";
 import { IMG } from "@/sections/data";
 
@@ -15,10 +16,10 @@ export function StorySection() {
           <div className="relative">
             {/* Main brand image */}
             <div className="overflow-hidden rounded-3xl border border-gold/20 shadow-gold">
-              <img
-                src={IMG.logo_packaging}
-                alt="House of Riddhi luxury packaging"
-                className="dino-float h-auto w-full object-cover"
+              <Img
+                src={IMG.storyChest}
+                alt="Handwoven silk saree draped on a heritage wooden chest"
+                className="dino-float aspect-[4/5] h-auto w-full object-cover"
               />
             </div>
 

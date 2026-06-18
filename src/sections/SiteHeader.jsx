@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { nav } from "@/sections/data";
+import { nav, IMG } from "@/sections/data";
 
 function navItemTo(href) {
   return href.startsWith("#") ? `/${href}` : href;
@@ -50,17 +50,20 @@ export function SiteHeader({ cartCount = 0, onCartOpen = () => {} }) {
             to="/#home"
             className="inline-flex min-w-0 shrink items-center gap-3 rounded-md text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            <img
-              src="/generated/brand/riddhi-logo-dark.png"
-              alt="House of Riddhi logo"
-              className="h-11 w-auto max-h-14 shrink-0 object-contain sm:h-12"
-              decoding="async"
-            />
-            <div className="flex flex-col">
-              <span className="font-display text-lg font-bold leading-tight tracking-wide text-maroon sm:text-xl">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/25 bg-card/80 p-1.5 shadow-premium-sm sm:size-12">
+              <img
+                src={IMG.logo}
+                alt=""
+                aria-hidden
+                className="size-full object-contain"
+                decoding="async"
+              />
+            </span>
+            <div className="flex min-w-0 flex-col">
+              <span className="font-display text-lg font-semibold leading-tight tracking-[0.02em] text-maroon sm:text-xl">
                 House of Riddhi
               </span>
-              <span className="hidden text-[0.55rem] font-semibold uppercase tracking-[0.25em] text-gold sm:block">
+              <span className="hidden text-[0.55rem] font-semibold uppercase tracking-[0.28em] text-gold sm:block">
                 Heritage woven in elegance
               </span>
             </div>

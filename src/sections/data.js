@@ -9,34 +9,19 @@ export const IMG = {
   logo_warm: "/generated/brand/riddhi-logo-warm.png",
   logo_packaging: "/generated/brand/riddhi-packaging.png",
 
-  // hero — these resolve to existing optimised assets (saree imagery via admin)
-  hero: "/generated/hero_section/hero-kids-gifts.webp",
-  labubu: "/generated/hero_section/labubu.webp",
-  dino_key: "/generated/hero_section/dino-key.png",
-  hero_watch: "/generated/hero_section/hero_watch.webp",
-  hero_jewellery: "/generated/hero_section/hero_jewellery.webp",
-
-  // catalog / collections
-  keychains: "/generated/catalog_section/catalog-keychains.webp",
-  magnets: "/generated/catalog_section/catalog-magnets.webp",
-  dinoKeychain: "/generated/catalog_section/dino-keychain-3d-bg.webp",
-
-  // story
-  story: "/generated/story_section/story-shelf.webp",
-  robot: "/generated/story_section/robo.webp",
-
-  // featured
-  giftBox: "/generated/featured_section/featured-giftbox.webp",
-  tray: "/generated/featured_section/featured-tray.webp",
-
-  // reach us / contact
-  reachUs: "/generated/reach_us_section/reach-us-illustration.webp",
-  dinoGiftBox: "/generated/reach_us_section/dino-gift.webp",
-
-  // accessories (repurposed as "why choose us" imagery)
-  jewellery: "/generated/accessories_section/jewellery.webp",
-  watches: "/generated/accessories_section/watches.webp",
-  watch_no_background: "/generated/accessories_section/watch_no_background.webp",
+  // saree landing imagery
+  heroSaree: "/generated/saree_section/hero-saree.webp",
+  catalog1: "/generated/saree_section/catalog-1.webp",
+  catalog2: "/generated/saree_section/catalog-2.webp",
+  catalog3: "/generated/saree_section/catalog-3.webp",
+  catalog4: "/generated/saree_section/catalog-4.webp",
+  featuredSaree: "/generated/saree_section/featured-saree.webp",
+  storyRack: "/generated/saree_section/story-rack.webp",
+  storyChest: "/generated/saree_section/story-chest.webp",
+  storyWeave: "/generated/saree_section/story-weave.webp",
+  storyBorder: "/generated/saree_section/story-border.webp",
+  packaging: "/generated/saree_section/packaging.webp",
+  brandBg: "/generated/saree_section/brand-saree-bg.webp",
 };
 
 export const nav = [

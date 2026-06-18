@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import { Img } from "@/components/ui/Img";
 import { SectionHeading } from "@/sections/SectionHeading";
+import { IMG } from "@/sections/data";
 
 const featuredItems = [
   {
@@ -8,8 +10,8 @@ const featuredItems = [
     from: "From ₹1,899",
     badge: "Bestseller",
     badgeColor: "bg-gold text-maroon-deep",
-    swatchFrom: "from-gold/20",
-    swatchTo: "to-maroon/15",
+    image: IMG.featuredSaree,
+    imageAlt: "Chettinad cotton saree with traditional checks",
   },
   {
     name: "Dharwad Linen Drape",
@@ -17,8 +19,8 @@ const featuredItems = [
     from: "From ₹2,499",
     badge: "New Arrival",
     badgeColor: "bg-maroon text-primary-foreground",
-    swatchFrom: "from-maroon/18",
-    swatchTo: "to-gold/12",
+    image: IMG.catalog1,
+    imageAlt: "Dharwad linen saree with zari border",
   },
   {
     name: "Kanjivaram Silk Cotton",
@@ -26,8 +28,8 @@ const featuredItems = [
     from: "From ₹3,799",
     badge: "Limited Edition",
     badgeColor: "bg-maroon-deep text-primary-foreground",
-    swatchFrom: "from-maroon-deep/22",
-    swatchTo: "to-gold/18",
+    image: IMG.catalog3,
+    imageAlt: "Kanjivaram silk cotton saree with temple border",
   },
 ];
 
@@ -53,25 +55,12 @@ export function FeaturedSection() {
               data-reveal
               className="reveal-up interactive-lift group flex flex-col overflow-hidden rounded-3xl border border-gold/15 bg-card shadow-premium transition-all hover:border-gold/35"
             >
-              {/* Fabric swatch visual */}
-              <div className={`relative h-52 w-full overflow-hidden bg-gradient-to-br ${item.swatchFrom} ${item.swatchTo} sm:h-60`}>
-                {/* Woven texture pattern */}
-                <div
-                  className="absolute inset-0 opacity-25 transition-transform duration-500 group-hover:scale-[1.04]"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect x='0' y='0' width='32' height='32' fill='none'/%3E%3Cpath d='M0 0h8v8H0zM8 8h8v8H8zM16 16h8v8H16zM24 24h8v8H24zM24 0h8v8H24zM16 8h8v8H16zM8 16h8v8H8zM0 24h8v8H0z' fill='%23C9943A' opacity='0.25'/%3E%3C/g%3E%3C/svg%3E")`,
-                    backgroundSize: "32px 32px",
-                  }}
+              <div className="relative h-52 w-full overflow-hidden sm:h-60">
+                <Img
+                  src={item.image}
+                  alt={item.imageAlt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
-                {/* Paisley overlay */}
-                <div
-                  className="absolute inset-0 opacity-15"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cellipse cx='30' cy='30' rx='14' ry='22' fill='none' stroke='%23C9943A' stroke-width='0.8' transform='rotate(20 30 30)'/%3E%3Ccircle cx='30' cy='12' r='3' fill='%23C9943A' opacity='0.5'/%3E%3C/svg%3E")`,
-                    backgroundSize: "60px 60px",
-                  }}
-                />
-                {/* Badge */}
                 <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide shadow-sm ${item.badgeColor}`}>
                   {item.badge}
                 </span>

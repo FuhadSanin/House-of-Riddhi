@@ -35,7 +35,7 @@ function HomeSections({ form, status, onChange, onSubmit }) {
       <CatalogSection />
       <AccessoriesSection />
       <StorySection />
-      <FeaturedSection />
+      {/* <FeaturedSection /> */}
       <ReviewsSection />
       <ReachUsSection form={form} status={status} onChange={onChange} onSubmit={onSubmit} />
       <SiteFooter />
@@ -129,19 +129,42 @@ export default function App() {
   useEffect(() => {
     if (location.pathname !== "/") return;
 
+    const revealSection = (section) => {
+      section?.querySelectorAll("[data-reveal]").forEach((node) => {
+        node.classList.add("is-visible");
+      });
+    };
+
     const nodes = document.querySelectorAll("[data-reveal]");
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-visible");
+          // Heading can enter view while cards below stay hidden (hash jumps, tall sections).
+          revealSection(entry.target.closest("section"));
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px 5% 0px" }
     );
 
     nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, [location.pathname]);
+
+    const hashId = decodeURIComponent(location.hash.replace(/^#/, ""));
+    let hashTimer;
+    if (hashId) {
+      const revealHashSection = () => {
+        revealSection(document.getElementById(hashId));
+      };
+      requestAnimationFrame(revealHashSection);
+      hashTimer = window.setTimeout(revealHashSection, 450);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (hashTimer) window.clearTimeout(hashTimer);
+    };
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     persistCart(cart);

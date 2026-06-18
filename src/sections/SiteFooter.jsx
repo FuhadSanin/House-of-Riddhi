@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Aperture, Share2, Video, MessageCircle } from "lucide-react";
+import { IMG } from "@/sections/data";
 
 const footerLinks = {
   Shop: [
@@ -71,16 +72,19 @@ export function SiteFooter() {
             {/* Brand column */}
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3">
-                <img
-                  src="/generated/brand/riddhi-logo-dark.png"
-                  alt="House of Riddhi"
-                  className="h-12 w-auto object-contain opacity-90"
-                />
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-white/5 p-1.5">
+                  <img
+                    src={IMG.logo_warm}
+                    alt=""
+                    aria-hidden
+                    className="size-full object-contain"
+                  />
+                </span>
                 <div>
-                  <p className="font-display text-xl font-bold text-primary-foreground">
+                  <p className="font-display text-xl font-semibold tracking-[0.02em] text-primary-foreground">
                     House of Riddhi
                   </p>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gold opacity-80">
+                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-gold">
                     Heritage woven in elegance
                   </p>
                 </div>

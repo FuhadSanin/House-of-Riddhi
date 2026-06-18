@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { Img } from "@/components/ui/Img";
 import { cn } from "@/lib/utils";
 import { IMG } from "@/sections/data";
 
@@ -12,10 +13,8 @@ const heroBadges = [
   { label: "Daily Elegance", href: "/shop" },
 ];
 
-const heroBadgeLinkClass = cn(
-  buttonVariants({ variant: "secondary", size: "sm" }),
-  "hero-badge-enter h-auto min-h-10 rounded-full border border-gold/25 bg-card/85 px-3.5 py-2 text-[0.6875rem] font-semibold uppercase tracking-wide text-maroon shadow-premium-sm backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-gold/8 hover:text-maroon whitespace-nowrap"
-);
+const heroBadgeLinkClass =
+  "hero-badge-enter inline-flex items-center justify-center h-auto min-h-10 rounded-full border border-gold/25 bg-card/90 px-3.5 py-2 text-[0.6875rem] font-semibold uppercase tracking-wide text-maroon shadow-premium-sm backdrop-blur-sm transition-all hover:border-gold/50 hover:bg-card hover:text-maroon-deep whitespace-nowrap";
 
 export function HeroSection() {
   return (
@@ -144,24 +143,23 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Right — brand logo hero visual */}
+        {/* Right — hero saree visual */}
         <div className="order-first flex w-full flex-col items-center justify-center lg:order-last">
           <div
             className="hero-visual-rise relative w-full max-w-[18rem] sm:max-w-sm md:max-w-md"
             style={{ animationDelay: "90ms" }}
           >
-            {/* Gold glow behind logo */}
+            {/* Gold glow behind image */}
             <div className="hero-glow-pulse absolute inset-0 rounded-[3rem] bg-gradient-to-br from-gold/18 via-primary-foreground/4 to-gold/12 blur-3xl" />
 
-            {/* Logo frame */}
+            {/* Saree frame */}
             <div className="relative overflow-hidden rounded-3xl border border-gold/20 bg-white/4 p-2 shadow-gold backdrop-blur-sm">
               <div className="relative overflow-hidden rounded-2xl">
-                <img
-                  src={IMG.logo_warm}
-                  alt="House of Riddhi — Heritage woven in elegance"
-                  className="dino-float h-auto w-full object-cover"
-                  loading="eager"
-                  decoding="async"
+                <Img
+                  src={IMG.heroSaree}
+                  alt="Emerald silk saree with gold zari, brass lamps and carved heritage chest"
+                  className="dino-float aspect-[3/4] h-auto w-full object-cover"
+                  eager
                 />
                 {/* Overlay gold frame */}
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/15" />
