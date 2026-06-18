@@ -40,15 +40,12 @@ export function LoadingScreen({ children }) {
           style={{ opacity: phase === "fading" ? 0 : 1, pointerEvents: phase === "fading" ? "none" : "auto" }}
         >
           {/* Logo */}
-          <span className="flex size-24 items-center justify-center rounded-full border border-gold/20 bg-card/60 p-4 shadow-premium">
-            <img
-              src={IMG.logo}
-              alt=""
-              aria-hidden
-              className="size-full object-contain"
-              loading="eager"
-            />
-          </span>
+          <img
+            src={IMG.logo}
+            alt="House of Riddhi logo"
+            className="h-32 w-auto object-contain sm:h-40"
+            loading="eager"
+          />
 
           {/* Brand name */}
           <p className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground">

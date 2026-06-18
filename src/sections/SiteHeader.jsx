@@ -44,21 +44,18 @@ export function SiteHeader({ cartCount = 0, onCartOpen = () => {} }) {
         {/* Gold top accent line */}
         <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-gold to-transparent opacity-60" />
 
-        <div className="relative z-10 mx-auto flex h-16 min-h-[4rem] max-w-6xl items-center justify-between gap-3 px-4 sm:h-18 sm:gap-4 sm:px-6">
+        <div className="relative z-10 mx-auto flex h-20 min-h-[5rem] max-w-6xl items-center justify-between gap-3 px-4 sm:h-24 sm:gap-4 sm:px-6">
           {/* Logo */}
           <Link
             to="/#home"
             className="inline-flex min-w-0 shrink items-center gap-3 rounded-md text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/25 bg-card/80 p-1.5 shadow-premium-sm sm:size-12">
-              <img
-                src={IMG.logo}
-                alt=""
-                aria-hidden
-                className="size-full object-contain"
-                decoding="async"
-              />
-            </span>
+            <img
+              src={IMG.logo}
+              alt="House of Riddhi logo"
+              className="h-16 w-auto shrink-0 object-contain sm:h-20"
+              decoding="async"
+            />
             <div className="flex min-w-0 flex-col">
               <span className="font-display text-lg font-semibold leading-tight tracking-[0.02em] text-maroon sm:text-xl">
                 House of Riddhi
@@ -132,7 +129,7 @@ export function SiteHeader({ cartCount = 0, onCartOpen = () => {} }) {
             <div
               id="mobile-nav"
               className={cn(
-                "fixed inset-x-0 bottom-0 top-[4.125rem] z-[85] flex flex-col bg-ivory/98 backdrop-blur-md transition-[visibility,opacity,transform] duration-200 md:hidden",
+                "fixed inset-x-0 bottom-0 top-20 z-[85] flex flex-col bg-ivory/98 backdrop-blur-md transition-[visibility,opacity,transform] duration-200 sm:top-24 md:hidden",
                 menuOpen
                   ? "visible pointer-events-auto translate-y-0 opacity-100"
                   : "invisible pointer-events-none translate-y-1 opacity-0"
@@ -143,7 +140,7 @@ export function SiteHeader({ cartCount = 0, onCartOpen = () => {} }) {
               <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
               <nav
-                className="flex max-h-[min(100dvh-4.125rem,100vh-4.125rem)] flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-4 py-5"
+                className="flex max-h-[min(100dvh-5rem,100vh-5rem)] flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-4 py-5 sm:max-h-[min(100dvh-6rem,100vh-6rem)]"
                 aria-label="Mobile main"
               >
                 {nav.map((item) => (

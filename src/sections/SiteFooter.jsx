@@ -71,15 +71,12 @@ export function SiteFooter() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             {/* Brand column */}
             <div className="lg:col-span-2">
-              <div className="flex items-center gap-3">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-gold/30 bg-white/5 p-1.5">
-                  <img
-                    src={IMG.logo_warm}
-                    alt=""
-                    aria-hidden
-                    className="size-full object-contain"
-                  />
-                </span>
+              <div className="flex items-center gap-4">
+                <img
+                  src={IMG.logo}
+                  alt="House of Riddhi logo"
+                  className="h-20 w-auto shrink-0 object-contain sm:h-24"
+                />
                 <div>
                   <p className="font-display text-xl font-semibold tracking-[0.02em] text-primary-foreground">
                     House of Riddhi

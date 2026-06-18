@@ -55,8 +55,8 @@ export function AdminLoginPage() {
         <div className="mb-8 flex flex-col items-center gap-3 text-center">
           <img
             src={IMG.logo}
-            alt="House of Riddhi"
-            className="h-20 w-auto object-contain"
+            alt="House of Riddhi logo"
+            className="h-28 w-auto object-contain sm:h-32"
           />
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">

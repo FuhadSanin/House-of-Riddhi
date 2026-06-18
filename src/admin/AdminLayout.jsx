@@ -50,9 +50,9 @@ export function AdminLayout() {
                 aria-label="House of Riddhi — home"
               >
                 <img
-                  src={IMG.logo_red}
-                  alt=""
-                  className="h-14 w-auto max-h-16 object-contain object-left sm:h-16"
+                  src={IMG.logo}
+                  alt="House of Riddhi logo"
+                  className="h-20 w-auto max-h-24 object-contain object-left sm:h-24"
                   decoding="async"
                 />
               </Link>

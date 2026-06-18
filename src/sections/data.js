@@ -4,9 +4,9 @@
  */
 export const IMG = {
   // brand
-  logo: "/generated/brand/riddhi-logo-dark.png",
-  logo_red: "/generated/brand/riddhi-logo-dark.png",
-  logo_warm: "/generated/brand/riddhi-logo-warm.png",
+  logo: "/generated/brand/riddhi-logo-warm.webp",
+  logo_red: "/generated/brand/riddhi-logo-warm.webp",
+  logo_warm: "/generated/brand/riddhi-logo-warm.webp",
   logo_packaging: "/generated/brand/riddhi-packaging.png",
 
   // saree landing imagery
