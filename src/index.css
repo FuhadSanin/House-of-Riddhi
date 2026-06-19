@@ -356,6 +356,15 @@ h3 {
   animation-play-state: paused;
 }
 
+.marquee-collections-track {
+  animation: marquee-left 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee-collections-track:hover {
+  animation-play-state: paused;
+}
+
 footer {
   scroll-snap-align: none;
 }
@@ -425,6 +434,7 @@ footer {
   .hero-glow-pulse,
   .left-drift-soft,
   .marquee-left-track,
+  .marquee-collections-track,
   .gold-shimmer-text {
     animation: none;
     opacity: 1;

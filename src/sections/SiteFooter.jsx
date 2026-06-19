@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Aperture, Share2, Video, MessageCircle } from "lucide-react";
-import { IMG } from "@/sections/data";
+import { SocialLinkButton } from "@/components/SocialIcon";
+import { IMG, SOCIALS } from "@/sections/data";
 
 const footerLinks = {
   Shop: [
@@ -20,50 +20,11 @@ const footerLinks = {
   ],
 };
 
-const socials = [
-  { label: "Instagram", href: "https://instagram.com", icon: Aperture },
-  { label: "Share", href: "https://facebook.com", icon: Share2 },
-  { label: "YouTube", href: "https://youtube.com", icon: Video },
-  { label: "WhatsApp", href: "https://wa.me/919999999999", icon: MessageCircle },
-];
-
 export function SiteFooter() {
   return (
     <footer className="border-t border-gold/20 bg-maroon-deep text-primary-foreground">
       {/* Gold accent line */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-gold to-transparent opacity-60" />
-
-      {/* Newsletter */}
-      <div className="border-b border-gold/15 bg-primary/20 py-10">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-            <div>
-              <p className="font-display text-2xl font-semibold text-primary-foreground sm:text-3xl">
-                Join the House of Riddhi Circle
-              </p>
-              <p className="mt-1 text-sm text-primary-foreground/65">
-                New arrivals, exclusive offers, and weaving stories — delivered to your inbox.
-              </p>
-            </div>
-            <form
-              className="flex w-full max-w-sm gap-2 sm:w-auto"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-1 rounded-full border border-gold/30 bg-white/10 px-4 py-2.5 text-sm text-primary-foreground placeholder:text-primary-foreground/40 focus:outline-none focus:ring-2 focus:ring-gold/50 sm:w-56"
-              />
-              <button
-                type="submit"
-                className="rounded-full border border-gold/40 bg-gold px-5 py-2.5 text-sm font-semibold text-maroon-deep transition-opacity hover:opacity-90"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
 
       {/* Links grid */}
       <div className="py-12">
@@ -74,17 +35,9 @@ export function SiteFooter() {
               <div className="flex items-center gap-4">
                 <img
                   src={IMG.logo}
-                  alt="House of Riddhi logo"
+                  alt="House of Riddhi"
                   className="h-20 w-auto shrink-0 object-contain sm:h-24"
                 />
-                <div>
-                  <p className="font-display text-xl font-semibold tracking-[0.02em] text-primary-foreground">
-                    House of Riddhi
-                  </p>
-                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-gold">
-                    Heritage woven in elegance
-                  </p>
-                </div>
               </div>
               <p className="mt-5 max-w-xs text-sm leading-relaxed text-primary-foreground/60">
                 Celebrating the art of Indian handloom — every saree tells a story of tradition,
@@ -93,17 +46,14 @@ export function SiteFooter() {
 
               {/* Social links */}
               <div className="mt-6 flex gap-3">
-                {socials.map(({ label, href, icon: Icon }) => (
-                  <a
+                {SOCIALS.map(({ label, href, icon }) => (
+                  <SocialLinkButton
                     key={label}
+                    label={label}
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 bg-white/6 text-primary-foreground/75 transition-colors hover:border-gold/60 hover:bg-gold/15 hover:text-gold"
-                  >
-                    <Icon className="size-4" />
-                  </a>
+                    icon={icon}
+                    className="size-9"
+                  />
                 ))}
               </div>
             </div>

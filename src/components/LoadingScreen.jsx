@@ -42,7 +42,7 @@ export function LoadingScreen({ children }) {
           {/* Logo */}
           <img
             src={IMG.logo}
-            alt="House of Riddhi logo"
+            alt="House of Riddhi"
             className="h-32 w-auto object-contain sm:h-40"
             loading="eager"
           />

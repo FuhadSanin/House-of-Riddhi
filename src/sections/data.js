@@ -4,9 +4,12 @@
  */
 export const IMG = {
   // brand
-  logo: "/generated/brand/riddhi-logo-warm.webp",
-  logo_red: "/generated/brand/riddhi-logo-warm.webp",
-  logo_warm: "/generated/brand/riddhi-logo-warm.webp",
+  logo: "/generated/brand/house-of-riddhi-icon.webp",
+  logo_red: "/generated/brand/house-of-riddhi-icon.webp",
+  logo_warm: "/generated/brand/house-of-riddhi-icon.webp",
+  logoFull: "/generated/brand/house-of-riddhi-icon.webp",
+  heroBg: "/generated/brand/hero-white-saree.webp",
+  heroBrand: "/generated/brand/house-of-riddhi.webp",
   logo_packaging: "/generated/brand/riddhi-packaging.png",
 
   // saree landing imagery
@@ -24,12 +27,56 @@ export const IMG = {
   brandBg: "/generated/saree_section/brand-saree-bg.webp",
 };
 
+export const COLLECTIONS = [
+  {
+    id: "artisan",
+    number: "1",
+    title: "Artisan-crafted sarees",
+    description:
+      "Discover handwoven silks and cottons inspired by timeless Indian weaving traditions.",
+    image: IMG.catalog1,
+    imageAlt: "Handwoven artisan saree with traditional motifs",
+  },
+  {
+    id: "occasions",
+    number: "2",
+    title: "Curated for every occasion",
+    description:
+      "Each drape is curated for weddings, festivals, and elegant everyday wear.",
+    image: IMG.catalog2,
+    imageAlt: "Elegant saree curated for festive occasions",
+  },
+  {
+    id: "limited",
+    number: "3",
+    title: "Limited edition designs",
+    description:
+      "Collaborations with master weavers ensure authenticity and fair, transparent sourcing.",
+    image: IMG.catalog3,
+    imageAlt: "Limited edition saree with master weaver collaboration",
+  },
+  {
+    id: "quality",
+    number: "4",
+    title: "Quality guaranteed",
+    description:
+      "Premium fabrics are inspected to ensure lasting color, sheen, and fall.",
+    image: IMG.catalog4,
+    imageAlt: "Premium saree fabric with rich sheen and drape",
+  },
+];
+
 export const nav = [
   { label: "Home", href: "#home" },
   { label: "Collections", href: "#collections" },
   { label: "Our Story", href: "#story" },
   { label: "Contact", href: "#reach-us" },
   { label: "Shop", href: "/shop" },
+];
+
+export const SOCIALS = [
+  { label: "Instagram", href: "https://instagram.com", icon: "instagram" },
+  { label: "WhatsApp", href: "https://wa.me/919999999999", icon: "whatsapp" },
 ];
 
 export const REVIEWS = [

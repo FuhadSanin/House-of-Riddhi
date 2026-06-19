@@ -1,45 +1,6 @@
 import { Img } from "@/components/ui/Img";
 import { SectionHeading } from "@/sections/SectionHeading";
-import { IMG } from "@/sections/data";
-
-const collections = [
-  {
-    id: "artisan",
-    number: "1",
-    title: "Artisan-crafted sarees",
-    description:
-      "Discover handwoven silks and cottons inspired by timeless Indian weaving traditions.",
-    image: IMG.catalog1,
-    imageAlt: "Handwoven artisan saree with traditional motifs",
-  },
-  {
-    id: "occasions",
-    number: "2",
-    title: "Curated for every occasion",
-    description:
-      "Each drape is curated for weddings, festivals, and elegant everyday wear.",
-    image: IMG.catalog2,
-    imageAlt: "Elegant saree curated for festive occasions",
-  },
-  {
-    id: "limited",
-    number: "3",
-    title: "Limited edition designs",
-    description:
-      "Collaborations with master weavers ensure authenticity and fair, transparent sourcing.",
-    image: IMG.catalog3,
-    imageAlt: "Limited edition saree with master weaver collaboration",
-  },
-  {
-    id: "quality",
-    number: "4",
-    title: "Quality guaranteed",
-    description:
-      "Premium fabrics are inspected to ensure lasting color, sheen, and fall.",
-    image: IMG.catalog4,
-    imageAlt: "Premium saree fabric with rich sheen and drape",
-  },
-];
+import { COLLECTIONS } from "@/sections/data";
 
 export function CatalogSection() {
   return (
@@ -57,7 +18,7 @@ export function CatalogSection() {
         </div>
 
         <div className="mt-12 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6">
-          {collections.map((col) => (
+          {COLLECTIONS.map((col) => (
             <article
               key={col.id}
               data-reveal

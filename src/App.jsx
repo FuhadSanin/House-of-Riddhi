@@ -13,6 +13,7 @@ import { loadPersistedCart, persistCart } from "@/lib/cart-storage";
 import { submitContactMessage } from "@/lib/contact";
 import { useProductsQuery } from "@/features/shop/use-shop-queries";
 import { SiteHeader } from "@/sections/SiteHeader";
+import { SocialRail } from "@/components/SocialRail";
 import { HeroSection } from "@/sections/HeroSection";
 import { AccessoriesSection } from "@/sections/AccessoriesSection";
 import { CatalogSection } from "@/sections/CatalogSection";
@@ -32,10 +33,10 @@ function HomeSections({ form, status, onChange, onSubmit }) {
   return (
     <>
       <HeroSection />
+      <FeaturedSection />
       <CatalogSection />
       <AccessoriesSection />
       <StorySection />
-      {/* <FeaturedSection /> */}
       <ReviewsSection />
       <ReachUsSection form={form} status={status} onChange={onChange} onSubmit={onSubmit} />
       <SiteFooter />
@@ -287,7 +288,10 @@ export default function App() {
     <AuthProvider>
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       {!isAdminRoute ? (
-        <SiteHeader cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
+        <>
+          <SiteHeader cartCount={cartCount} onCartOpen={() => setCartOpen(true)} />
+          <SocialRail />
+        </>
       ) : null}
 
       <main>
