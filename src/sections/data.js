@@ -4,12 +4,12 @@
  */
 export const IMG = {
   // brand
-  logo: "/generated/brand/house-of-riddhi-icon.webp",
-  logo_red: "/generated/brand/house-of-riddhi-icon.webp",
-  logo_warm: "/generated/brand/house-of-riddhi-icon.webp",
-  logoFull: "/generated/brand/house-of-riddhi-icon.webp",
+  logo: "/generated/brand/image.png",
+  logo_red: "/generated/brand/image.png",
+  logo_warm: "/generated/brand/image.png",
+  logoFull: "/generated/brand/image.png",
   heroBg: "/generated/brand/hero-white-saree.webp",
-  heroBrand: "/generated/brand/house-of-riddhi.webp",
+  heroBrand: "/generated/brand/ho.webp",
   logo_packaging: "/generated/brand/riddhi-packaging.png",
 
   // saree landing imagery

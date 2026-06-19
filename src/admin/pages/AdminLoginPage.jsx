@@ -56,7 +56,7 @@ export function AdminLoginPage() {
           <img
             src={IMG.logo}
             alt="House of Riddhi logo"
-            className="h-28 w-auto object-contain sm:h-32"
+            className="h-32 w-auto object-contain sm:h-36"
           />
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">

@@ -52,7 +52,7 @@ export function SiteHeader({ cartCount = 0, onCartOpen = () => {} }) {
             <img
               src={IMG.logo}
               alt="House of Riddhi"
-              className="h-14 w-auto shrink-0 object-contain sm:h-[4.5rem]"
+              className="h-16 w-auto shrink-0 object-contain sm:h-20"
               decoding="async"
             />
           </Link>

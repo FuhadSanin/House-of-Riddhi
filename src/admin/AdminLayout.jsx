@@ -52,7 +52,7 @@ export function AdminLayout() {
                 <img
                   src={IMG.logo}
                   alt="House of Riddhi logo"
-                  className="h-20 w-auto max-h-24 object-contain object-left sm:h-24"
+                  className="h-24 w-auto max-h-28 object-contain object-left sm:h-28"
                   decoding="async"
                 />
               </Link>

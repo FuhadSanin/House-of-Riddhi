@@ -2,53 +2,53 @@
 
 /*
   House of Riddhi — Royal Indian Palette
-  Background: warm ivory (#FAF6EF), Primary: deep maroon (#6B1A36),
-  Accent: antique gold (#C9943A), Secondary: rich purplish-maroon (#4A0E28)
+  Background: warm ivory (#FAF6EF), Primary: antique purple (#3F0B3C),
+  Accent: antique gold (#C9943A), Secondary: deep purple (#2A0728)
 */
 :root {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
   --background: 38 55% 96%;
-  --foreground: 342 60% 14%;
+  --foreground: 303 55% 14%;
   --card: 38 45% 97%;
-  --card-foreground: 342 60% 14%;
+  --card-foreground: 303 55% 14%;
   --popover: 38 45% 97%;
-  --popover-foreground: 342 60% 14%;
-  --primary: 338 62% 26%;
+  --popover-foreground: 303 55% 14%;
+  --primary: 303 70% 15%;
   --primary-foreground: 44 70% 96%;
-  --secondary: 338 25% 91%;
-  --secondary-foreground: 338 62% 22%;
+  --secondary: 303 25% 91%;
+  --secondary-foreground: 303 70% 12%;
   --muted: 38 28% 92%;
-  --muted-foreground: 340 18% 44%;
+  --muted-foreground: 303 18% 44%;
   --accent: 37 57% 51%;
-  --accent-foreground: 342 60% 12%;
+  --accent-foreground: 303 55% 12%;
   --destructive: 0 72% 51%;
   --destructive-foreground: 0 0% 98%;
   --border: 38 22% 86%;
   --input: 38 22% 86%;
-  --ring: 338 62% 26%;
+  --ring: 303 70% 15%;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: 340 45% 8%;
+  --background: 303 45% 8%;
   --foreground: 40 50% 94%;
-  --card: 340 38% 11%;
+  --card: 303 38% 11%;
   --card-foreground: 40 50% 94%;
-  --popover: 340 38% 11%;
+  --popover: 303 38% 11%;
   --popover-foreground: 40 50% 94%;
   --primary: 37 57% 54%;
-  --primary-foreground: 340 45% 8%;
-  --secondary: 340 28% 16%;
+  --primary-foreground: 303 45% 8%;
+  --secondary: 303 28% 16%;
   --secondary-foreground: 40 40% 90%;
-  --muted: 340 25% 15%;
+  --muted: 303 25% 15%;
   --muted-foreground: 38 22% 65%;
   --accent: 37 57% 51%;
   --accent-foreground: 40 50% 96%;
   --destructive: 0 55% 42%;
   --destructive-foreground: 0 0% 98%;
-  --border: 340 22% 20%;
-  --input: 340 22% 20%;
+  --border: 303 22% 20%;
+  --input: 303 22% 20%;
   --ring: 37 57% 54%;
 }
 
@@ -75,14 +75,14 @@
   /* Brand tokens */
   --color-gold: hsl(37 57% 51%);
   --color-gold-light: hsl(44 72% 72%);
-  --color-maroon: hsl(338 62% 26%);
-  --color-maroon-deep: hsl(342 70% 16%);
-  --color-maroon-light: hsl(338 40% 55%);
+  --color-maroon: hsl(303 70% 15%);
+  --color-maroon-deep: hsl(303 71% 10%);
+  --color-maroon-light: hsl(303 45% 45%);
   --color-ivory: hsl(38 55% 96%);
   --color-ivory-dark: hsl(38 30% 88%);
   /* Legacy aliases kept for residual usage */
   --color-luxury-gold: hsl(37 57% 51%);
-  --color-luxury-navy: hsl(338 62% 26%);
+  --color-luxury-navy: hsl(303 70% 15%);
   --color-play-coral: hsl(0 60% 60%);
   --color-play-teal: hsl(160 40% 36%);
   --color-play-emerald: hsl(140 40% 42%);
@@ -126,8 +126,8 @@ body {
   background-color: hsl(var(--background));
   background-image:
     radial-gradient(ellipse 140% 70% at 0% 0%, hsl(37 57% 51% / 0.08), transparent 50%),
-    radial-gradient(ellipse 100% 55% at 100% 8%, hsl(338 62% 26% / 0.06), transparent 48%),
-    radial-gradient(ellipse 80% 40% at 50% 100%, hsl(338 62% 26% / 0.04), transparent 55%);
+    radial-gradient(ellipse 100% 55% at 100% 8%, hsl(303 70% 15% / 0.06), transparent 48%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, hsl(303 70% 15% / 0.04), transparent 55%);
   color: hsl(var(--foreground));
   letter-spacing: 0.01em;
   font-feature-settings: "kern" 1, "liga" 1;
@@ -189,7 +189,7 @@ h3 {
 .shadow-premium-sm {
   box-shadow:
     0 1px 0 0 hsl(37 57% 51% / 0.08),
-    0 8px 24px -12px hsl(338 62% 26% / 0.12),
+    0 8px 24px -12px hsl(303 70% 15% / 0.12),
     0 0 0 1px hsl(var(--border) / 0.5);
 }
 
@@ -203,7 +203,7 @@ h3 {
 .shadow-premium {
   box-shadow:
     0 1px 0 0 hsl(37 57% 51% / 0.1),
-    0 18px 40px -20px hsl(338 62% 26% / 0.16),
+    0 18px 40px -20px hsl(303 70% 15% / 0.16),
     0 0 0 1px hsl(var(--border) / 0.55);
 }
 
@@ -218,7 +218,7 @@ h3 {
   box-shadow:
     0 0 0 1px hsl(37 57% 51% / 0.3),
     0 4px 20px -6px hsl(37 57% 51% / 0.25),
-    0 20px 44px -18px hsl(338 62% 26% / 0.18);
+    0 20px 44px -18px hsl(303 70% 15% / 0.18);
 }
 
 .interactive-lift {
@@ -233,7 +233,7 @@ h3 {
     transform: translateY(-4px);
     box-shadow:
       0 1px 0 0 hsl(37 57% 51% / 0.12),
-      0 28px 56px -18px hsl(338 62% 26% / 0.2),
+      0 28px 56px -18px hsl(303 70% 15% / 0.2),
       0 0 0 1px hsl(37 57% 51% / 0.2);
   }
 }

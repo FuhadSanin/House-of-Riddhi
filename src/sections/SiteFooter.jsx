@@ -36,7 +36,7 @@ export function SiteFooter() {
                 <img
                   src={IMG.logo}
                   alt="House of Riddhi"
-                  className="h-20 w-auto shrink-0 object-contain sm:h-24"
+                  className="h-24 w-auto shrink-0 object-contain sm:h-28"
                 />
               </div>
               <p className="mt-5 max-w-xs text-sm leading-relaxed text-primary-foreground/60">
