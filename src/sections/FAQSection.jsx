@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { SectionHeading } from "@/sections/SectionHeading";
 import { SiteFooter } from "@/sections/SiteFooter";
 import { cn } from "@/lib/utils";
 
-const faqs = [
+export const faqs = [
   {
     q: "What types of sarees does House of Riddhi offer?",
     a: "We specialise in handcrafted cotton, linen, and handloom sarees. Our collection includes everyday cotton sarees with traditional block prints, crisp linen sarees for festive occasions, and authentic handloom weaves from Tamil Nadu, West Bengal, and Andhra Pradesh.",
@@ -79,11 +80,61 @@ function FAQItem({ faq, isOpen, onToggle }) {
   );
 }
 
-export function FAQPage() {
-  const [openIdx, setOpenIdx] = useState(null);
-
+function FAQAccordion({ items, defaultOpenIdx = null }) {
+  const [openIdx, setOpenIdx] = useState(defaultOpenIdx);
   const toggle = (idx) => setOpenIdx((prev) => (prev === idx ? null : idx));
 
+  return (
+    <div className="rounded-3xl border border-gold/18 bg-card shadow-premium">
+      <div className="px-5 py-2 sm:px-8">
+        {items.map((faq, idx) => (
+          <FAQItem
+            key={faq.q}
+            faq={faq}
+            isOpen={openIdx === idx}
+            onToggle={() => toggle(idx)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function FAQSection() {
+  const featuredFaqs = faqs.slice(0, 6);
+
+  return (
+    <section
+      id="faq"
+      className="scroll-my-16 scroll-mt-20 border-b border-gold/15 bg-gradient-to-bl from-maroon/4 via-background to-gold/6 py-14 sm:py-24"
+    >
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div data-reveal className="reveal-up">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Frequently Asked Questions"
+            description="Quick answers about our sarees, orders, and care. Need more detail? Browse the full FAQ or reach us on WhatsApp."
+          />
+        </div>
+
+        <div data-reveal className="reveal-up mt-12">
+          <FAQAccordion items={featuredFaqs} />
+        </div>
+
+        <div data-reveal className="reveal-up mt-8 text-center">
+          <Link
+            to="/faq"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-card px-6 py-2.5 text-sm font-semibold text-maroon transition-all hover:border-gold/45 hover:bg-gold/6"
+          >
+            View all questions
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function FAQPage() {
   return (
     <>
       <section className="min-h-[70svh] py-14 sm:py-20">
@@ -96,17 +147,8 @@ export function FAQPage() {
             />
           </div>
 
-          <div className="mt-12 rounded-3xl border border-gold/18 bg-card shadow-premium">
-            <div className="px-5 py-2 sm:px-8">
-              {faqs.map((faq, idx) => (
-                <FAQItem
-                  key={faq.q}
-                  faq={faq}
-                  isOpen={openIdx === idx}
-                  onToggle={() => toggle(idx)}
-                />
-              ))}
-            </div>
+          <div className="mt-12">
+            <FAQAccordion items={faqs} />
           </div>
 
           {/* CTA */}

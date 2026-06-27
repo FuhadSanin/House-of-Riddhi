@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Storefront catalog — public read, admin write
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // Checkout — anyone can place an order; admins manage orders
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read, update, delete: if isSignedIn();
+    }
+
+    // Admin user metadata
+    match /users/{userId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Contact form (Trigger Email extension watches `mail`)
+    match /mail/{docId} {
+      allow create: if true;
+      allow read: if isSignedIn();
+    }
+  }
+}

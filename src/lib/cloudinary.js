@@ -2,7 +2,7 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { auto } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
 
-export const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? "dj7iljoxn";
+export const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME ?? "dri0818tj";
 
 export const cld = new Cloudinary({ cloud: { cloudName } });
 

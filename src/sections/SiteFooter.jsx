@@ -15,8 +15,8 @@ const footerLinks = {
     { label: "Our Story", href: "/#story" },
     { label: "Collections", href: "/#collections" },
     { label: "Contact Us", href: "/#reach-us" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Shipping & Returns", href: "/shipping" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Shipping & Returns", href: "/#shipping" },
   ],
 };
 

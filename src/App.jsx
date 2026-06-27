@@ -10,6 +10,7 @@ import { RequireAuth } from "@/admin/components/RequireAuth";
 import { AuthProvider } from "@/features/auth/AuthContext";
 import { toast } from "sonner";
 import { loadPersistedCart, persistCart } from "@/lib/cart-storage";
+import { calculateSubtotal } from "@/lib/shipping";
 import { submitContactMessage } from "@/lib/contact";
 import { useProductsQuery } from "@/features/shop/use-shop-queries";
 import { SiteHeader } from "@/sections/SiteHeader";
@@ -25,6 +26,8 @@ import { CartDrawer } from "@/sections/CartDrawer";
 import { CheckoutPage } from "@/sections/CheckoutPage";
 import { ProductDetailsPage } from "@/sections/ProductDetailsPage";
 import { ReachUsSection } from "@/sections/ReachUsSection";
+import { FAQSection } from "@/sections/FAQSection";
+import { ShippingSection } from "@/sections/ShippingSection";
 import { SiteFooter } from "@/sections/SiteFooter";
 import { FAQPage } from "@/sections/FAQSection";
 import { ShippingPage } from "@/sections/ShippingSection";
@@ -38,6 +41,8 @@ function HomeSections({ form, status, onChange, onSubmit }) {
       <AccessoriesSection />
       <StorySection />
       <ReviewsSection />
+      <ShippingSection />
+      <FAQSection />
       <ReachUsSection form={form} status={status} onChange={onChange} onSubmit={onSubmit} />
       <SiteFooter />
     </>
@@ -266,15 +271,15 @@ export default function App() {
     () => cart.reduce((sum, item) => sum + item.quantity, 0),
     [cart]
   );
-  const cartTotal = useMemo(
-    () => cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+  const cartSubtotal = useMemo(
+    () => calculateSubtotal(cart),
     [cart]
   );
 
   const onCheckout = () => {
     if (!cart.length) return;
     setCartOpen(false);
-    navigate("/checkout", { state: { items: cart, total: cartTotal } });
+    navigate("/checkout", { state: { items: cart, subtotal: cartSubtotal } });
   };
 
   const onOrderConfirmed = () => {
@@ -347,7 +352,7 @@ export default function App() {
         <CartDrawer
           isOpen={cartOpen}
           items={cart}
-          total={cartTotal}
+          total={cartSubtotal}
           isCheckingOut={false}
           checkoutStatus=""
           onClose={() => setCartOpen(false)}

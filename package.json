@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "optimise-images": "node scripts/optimise-images.mjs"
+    "optimise-images": "node scripts/optimise-images.mjs",
+    "cloudinary:onboard": "node --env-file=.env scripts/cloudinary-onboard.mjs"
   },
   "dependencies": {
     "@cloudinary/react": "^1.14.4",
@@ -17,6 +18,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@tanstack/react-query": "^5.97.0",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.10.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "firebase": "^12.12.0",

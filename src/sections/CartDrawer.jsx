@@ -1,13 +1,15 @@
 import { Loader2, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  calculateOrderTotals,
+  calculateSubtotal,
+  formatInr,
+} from "@/lib/shipping";
 
 function formatCurrency(value) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(value);
+  return formatInr(value);
 }
 
 /** Editable quantity input — shows the current qty, lets user type a new value. */
@@ -86,6 +88,10 @@ export function CartDrawer({
   onRemove,
   onCheckout,
 }) {
+  const subtotal = calculateSubtotal(items);
+  const { shippingFee, total: grandTotal, freeShippingEligible, amountForFreeShipping } =
+    calculateOrderTotals({ subtotal });
+
   return (
     <>
       <div
@@ -165,15 +171,37 @@ export function CartDrawer({
             </div>
 
             <div className="mt-6 rounded-2xl border border-border/60 bg-card p-4 shadow-premium-sm">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span className="font-semibold">{formatCurrency(total)}</span>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="font-semibold tabular-nums">{formatCurrency(subtotal)}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Shipping</span>
+                  <span className="font-semibold tabular-nums">
+                    {shippingFee === 0 ? "Free" : formatCurrency(shippingFee)}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between border-t border-border pt-2">
+                  <span className="font-semibold">Total</span>
+                  <span className="text-lg font-bold tabular-nums">{formatCurrency(grandTotal)}</span>
+                </div>
               </div>
+              {!freeShippingEligible && amountForFreeShipping > 0 ? (
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                  Add {formatCurrency(amountForFreeShipping)} more for free standard shipping.
+                </p>
+              ) : null}
               <Button className="mt-4 w-full gap-2 rounded-full bg-maroon text-primary-foreground hover:bg-maroon/85" onClick={onCheckout} disabled={isCheckingOut}>
                 {isCheckingOut && <Loader2 className="size-4 animate-spin" aria-hidden />}
                 Checkout
               </Button>
-              {checkoutStatus ? <p className="mt-3 text-xs text-muted-foreground">{checkoutStatus}</p> : null}
+              <p className="mt-3 text-center text-xs text-muted-foreground">
+                <Link to="/shipping" className="text-maroon underline-offset-4 hover:underline">
+                  Shipping & returns policy
+                </Link>
+              </p>
+              {checkoutStatus ? <p className="mt-2 text-xs text-muted-foreground">{checkoutStatus}</p> : null}
             </div>
           </>
         )}

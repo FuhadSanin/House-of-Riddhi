@@ -30,10 +30,19 @@ function generateOrderId() {
  *   total         – number (INR)
  *   customer      – { phone, email }
  *   screenshotUrl – string | null
- *   status        – "pending_review" | "confirmed" | "cancelled"
+ *   status        – "pending_review" | "confirmed" | "cancelled" | "returned"
  *   createdAt     – Timestamp
  */
-export async function submitOrder({ items, total, customer, screenshotFile, onProgress }) {
+export async function submitOrder({
+  items,
+  subtotal,
+  shippingFee = 0,
+  shippingMethod = "standard",
+  total,
+  customer,
+  screenshotFile,
+  onProgress,
+}) {
   let screenshotUrl = null;
 
   if (screenshotFile) {
@@ -61,6 +70,9 @@ export async function submitOrder({ items, total, customer, screenshotFile, onPr
 
   await setDoc(orderRef, {
     items: orderItems,
+    subtotal: subtotal ?? total,
+    shippingFee: shippingFee ?? 0,
+    shippingMethod,
     total,
     customer: {
       phone: customer?.phone?.trim() ?? "",
@@ -80,7 +92,7 @@ export async function submitOrder({ items, total, customer, screenshotFile, onPr
 /**
  * Update the status of an order.
  * @param {string} orderId
- * @param {"pending_review"|"confirmed"|"cancelled"} status
+ * @param {"pending_review"|"confirmed"|"cancelled"|"returned"} status
  */
 export async function updateOrderStatus(orderId, status) {
   if (!firestore) throw new Error("Firestore not available");

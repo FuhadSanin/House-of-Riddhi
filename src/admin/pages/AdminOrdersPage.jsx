@@ -13,6 +13,7 @@ import {
   MapPin,
   MessageCircle,
   RefreshCw,
+  RotateCcw,
   Search,
   ShoppingBag,
 } from "lucide-react";
@@ -78,12 +79,14 @@ const STATUS_STYLES = {
   pending_review: "bg-amber-50 text-orange-700 border border-amber-500 dark:bg-amber-500/20 dark:text-amber-300 dark:border-amber-500/40",
   confirmed:      "bg-emerald-50 text-green-700 border border-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300 dark:border-emerald-500/40",
   cancelled:      "bg-red-500 text-white border border-red-600 dark:bg-red-500/20 dark:text-red-300 dark:border-red-500/40",
+  returned:       "bg-violet-50 text-violet-700 border border-violet-500 dark:bg-violet-500/20 dark:text-violet-300 dark:border-violet-500/40",
 };
 
 const STATUS_LABEL = {
   pending_review: "Pending review",
   confirmed:      "Confirmed",
   cancelled:      "Cancelled",
+  returned:       "Returned",
 };
 
 function StatusBadge({ status }) {
@@ -99,7 +102,7 @@ function StatusBadge({ status }) {
   );
 }
 
-function OrderCard({ order, expanded, onToggle, onConfirm, confirmingId, onCancel, cancellingId }) {
+function OrderCard({ order, expanded, onToggle, onConfirm, confirmingId, onCancel, cancellingId, onReturn, returningId }) {
   return (
     <div className="rounded-2xl border border-border bg-card shadow-premium-sm">
       {/* Summary row */}
@@ -186,7 +189,24 @@ function OrderCard({ order, expanded, onToggle, onConfirm, confirmingId, onCance
                     {confirmingId === order.id ? "Confirming…" : "Mark as confirmed"}
                   </Button>
                 )}
-                {order.status !== "cancelled" && (
+                {order.status === "confirmed" && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    className="gap-2 rounded-full border-violet-400/50 text-violet-700 hover:bg-violet-50 dark:text-violet-300 dark:hover:bg-violet-500/10"
+                    disabled={returningId === order.id || cancellingId === order.id}
+                    onClick={(e) => { e.stopPropagation(); onReturn(order.id); }}
+                  >
+                    {returningId === order.id ? (
+                      <Loader2 className="size-3.5 animate-spin" aria-hidden />
+                    ) : (
+                      <RotateCcw className="size-3.5" aria-hidden />
+                    )}
+                    {returningId === order.id ? "Processing…" : "Return"}
+                  </Button>
+                )}
+                {order.status !== "cancelled" && order.status !== "returned" && (
                   <Button
                     type="button"
                     size="sm"
@@ -252,7 +272,7 @@ function OrderCard({ order, expanded, onToggle, onConfirm, confirmingId, onCance
   );
 }
 
-function OrderList({ orders, search, expanded, onToggle, onConfirm, confirmingId, onCancel, cancellingId, emptyLabel }) {
+function OrderList({ orders, search, expanded, onToggle, onConfirm, confirmingId, onCancel, cancellingId, onReturn, returningId, emptyLabel }) {
   const filtered = useMemo(() => {
     const q = search.trim().toUpperCase();
     if (!q) return orders;
@@ -280,6 +300,8 @@ function OrderList({ orders, search, expanded, onToggle, onConfirm, confirmingId
           confirmingId={confirmingId}
           onCancel={onCancel}
           cancellingId={cancellingId}
+          onReturn={onReturn}
+          returningId={returningId}
         />
       ))}
     </div>
@@ -294,10 +316,12 @@ export function AdminOrdersPage() {
   const [search, setSearch] = useState("");
   const [confirmingId, setConfirmingId] = useState(null);
   const [cancellingId, setCancellingId] = useState(null);
+  const [returningId, setReturningId] = useState(null);
 
   const pending   = useMemo(() => orders.filter((o) => o.status === "pending_review"), [orders]);
   const confirmed = useMemo(() => orders.filter((o) => o.status === "confirmed"), [orders]);
   const cancelled = useMemo(() => orders.filter((o) => o.status === "cancelled"), [orders]);
+  const returned  = useMemo(() => orders.filter((o) => o.status === "returned"), [orders]);
 
   const toggle = (id) => setExpanded((prev) => (prev === id ? null : id));
 
@@ -325,6 +349,18 @@ export function AdminOrdersPage() {
     }
   };
 
+  const onReturn = async (orderId) => {
+    setReturningId(orderId);
+    try {
+      await updateStatus.mutateAsync({ orderId, status: "returned" });
+      toast.success(`Order ${orderId} marked as returned`);
+    } catch (err) {
+      toast.error("Could not mark return", { description: err.message });
+    } finally {
+      setReturningId(null);
+    }
+  };
+
   if (isError) {
     return (
       <div className="rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-6 text-center" role="alert">
@@ -345,7 +381,7 @@ export function AdminOrdersPage() {
           <p className="mt-1 text-sm text-muted-foreground">
             {isLoading
               ? "Loading…"
-              : `${orders.length} order${orders.length !== 1 ? "s" : ""} — ${pending.length} pending, ${cancelled.length} cancelled`}
+              : `${orders.length} order${orders.length !== 1 ? "s" : ""} — ${pending.length} pending, ${confirmed.length} completed, ${returned.length} returned`}
           </p>
         </div>
         <Button
@@ -409,6 +445,14 @@ export function AdminOrdersPage() {
                 </span>
               )}
             </TabsTrigger>
+            <TabsTrigger value="returns">
+              Returns
+              {returned.length > 0 && (
+                <span className="ml-2 rounded-full bg-violet-100 px-1.5 py-0.5 text-xs font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-400">
+                  {returned.length}
+                </span>
+              )}
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending">
@@ -421,6 +465,8 @@ export function AdminOrdersPage() {
               confirmingId={confirmingId}
               onCancel={onCancel}
               cancellingId={cancellingId}
+              onReturn={onReturn}
+              returningId={returningId}
               emptyLabel={search ? "No pending orders match that ID." : "No pending orders."}
             />
           </TabsContent>
@@ -435,6 +481,8 @@ export function AdminOrdersPage() {
               confirmingId={confirmingId}
               onCancel={onCancel}
               cancellingId={cancellingId}
+              onReturn={onReturn}
+              returningId={returningId}
               emptyLabel={search ? "No completed orders match that ID." : "No completed orders yet."}
             />
           </TabsContent>
@@ -449,7 +497,25 @@ export function AdminOrdersPage() {
               confirmingId={confirmingId}
               onCancel={onCancel}
               cancellingId={cancellingId}
+              onReturn={onReturn}
+              returningId={returningId}
               emptyLabel={search ? "No cancelled orders match that ID." : "No cancelled orders."}
+            />
+          </TabsContent>
+
+          <TabsContent value="returns">
+            <OrderList
+              orders={returned}
+              search={search}
+              expanded={expanded}
+              onToggle={toggle}
+              onConfirm={onConfirm}
+              confirmingId={confirmingId}
+              onCancel={onCancel}
+              cancellingId={cancellingId}
+              onReturn={onReturn}
+              returningId={returningId}
+              emptyLabel={search ? "No returns match that ID." : "No returned orders yet."}
             />
           </TabsContent>
         </Tabs>

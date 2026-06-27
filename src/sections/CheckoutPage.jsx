@@ -9,13 +9,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { getCldImage } from "@/lib/cloudinary";
 import { submitOrder } from "@/api/orders-api";
+import {
+  calculateOrderTotals,
+  calculateSubtotal,
+  formatInr,
+  isExpressAvailable,
+  SHIPPING,
+} from "@/lib/shipping";
 
 function formatCurrency(value) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(value);
+  return formatInr(value);
 }
 
 /** Renders a product thumbnail — uses AdvancedImage if the src is a Cloudinary public_id,
@@ -48,9 +51,11 @@ export function CheckoutPage({ onOrderConfirmed }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { items = [], total = 0 } = location.state ?? {};
+  const { items = [], subtotal: stateSubtotal } = location.state ?? {};
+  const subtotal = stateSubtotal ?? calculateSubtotal(items);
 
   const [customer, setCustomer] = useState({ phone: "", email: "", address: "", city: "", pincode: "" });
+  const [deliveryMethod, setDeliveryMethod] = useState("standard");
   const [screenshot, setScreenshot] = useState(null);
   const [preview, setPreview] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -71,7 +76,20 @@ export function CheckoutPage({ onOrderConfirmed }) {
     return () => { if (preview) URL.revokeObjectURL(preview); };
   }, [preview]);
 
+  useEffect(() => {
+    if (deliveryMethod === "express" && !isExpressAvailable(customer.city)) {
+      setDeliveryMethod("standard");
+    }
+  }, [deliveryMethod, customer.city]);
+
   if (!items.length) return null;
+
+  const orderTotals = calculateOrderTotals({
+    subtotal,
+    deliveryMethod,
+    city: customer.city,
+  });
+  const { shippingFee, total, expressAvailable } = orderTotals;
 
   const handleFile = (file) => {
     if (!file) return;
@@ -110,6 +128,9 @@ export function CheckoutPage({ onOrderConfirmed }) {
     try {
       const result = await submitOrder({
         items,
+        subtotal,
+        shippingFee,
+        shippingMethod: orderTotals.deliveryMethod,
         total,
         customer,
         screenshotFile: screenshot,
@@ -197,9 +218,21 @@ export function CheckoutPage({ onOrderConfirmed }) {
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-          <span className="font-semibold">Total</span>
-          <span className="text-xl font-bold tabular-nums">{formatCurrency(total)}</span>
+        <div className="mt-4 space-y-2 border-t border-border pt-4 text-sm">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Subtotal</span>
+            <span className="font-semibold tabular-nums">{formatCurrency(subtotal)}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Shipping</span>
+            <span className="font-semibold tabular-nums">
+              {shippingFee === 0 ? "Free" : formatCurrency(shippingFee)}
+            </span>
+          </div>
+          <div className="flex items-center justify-between pt-1">
+            <span className="font-semibold">Total</span>
+            <span className="text-xl font-bold tabular-nums">{formatCurrency(total)}</span>
+          </div>
         </div>
       </div>
 
@@ -432,7 +465,18 @@ export function CheckoutPage({ onOrderConfirmed }) {
         >
           Continue shopping
         </Link>
+        <Link
+          to="/shipping"
+          className={cn(buttonVariants({ variant: "ghost" }), "rounded-full no-underline")}
+        >
+          Shipping & returns
+        </Link>
       </div>
     </section>
   );
+}
+
+function getStandardShippingLabel(subtotal) {
+  const fee = subtotal >= SHIPPING.FREE_THRESHOLD ? 0 : SHIPPING.STANDARD_FEE;
+  return fee === 0 ? "Free" : formatInr(fee);
 }
